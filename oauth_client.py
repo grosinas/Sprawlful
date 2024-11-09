@@ -3,8 +3,8 @@ from requests_oauthlib import OAuth2Session
 
 # Your client credentials 
 # DO NOT CHANGE, it has like 29k requests. Do not waste.
-client_id = 'sh-b203c513-8741-4360-b982-e4ac316c9f9f'
-client_secret = 'Tq07v2FnohSm9PucuklZqRu2IPoBMt66'
+client_id = '<Your id here>'
+client_secret = '<Your secret here>'
 
 # Create a session
 client = BackendApplicationClient(client_id=client_id)

@@ -5,8 +5,8 @@ from sentinel2 import generateImage
 from sentinel1 import getRadar
 
 # Client credentials (preserve existing tokens to avoid extra requests)
-client_id = 'sh-b203c513-8741-4360-b982-e4ac316c9f9f'
-client_secret = 'Tq07v2FnohSm9PucuklZqRu2IPoBMt66'
+client_id = '<Your Id Here>'
+client_secret = '<Your Id Here>'
 
 # Create a session
 client = BackendApplicationClient(client_id=client_id)
