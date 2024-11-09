@@ -47,8 +47,8 @@ def generateImage(city, coordinates, year, oauth):
             ],
         },
         "output": {
-            "width": 2048,
-            "height": 2048,
+            "width": 1024,
+            "height": 1024,
         },
         "evalscript": evalscript,
     }

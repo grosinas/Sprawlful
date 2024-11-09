@@ -2,6 +2,7 @@ from oauthlib.oauth2 import BackendApplicationClient
 from requests_oauthlib import OAuth2Session
 import sys
 from sentinel2 import generateImage
+from sentinel1 import getRadar
 
 # Client credentials (preserve existing tokens to avoid extra requests)
 client_id = 'sh-b203c513-8741-4360-b982-e4ac316c9f9f'
@@ -18,6 +19,8 @@ token = oauth.fetch_token(
     include_client_id=True
 )
 
+
+# cities to coordinates dicitionary
 cities = {"Warsaw" : [20.775113, 52.391717, 21.375827, 52.086301], "Vilnius" : [24.939876, 54.872075, 25.599055, 54.555552]}
 
 def getPicture(city, start, end):
@@ -28,4 +31,5 @@ def getPicture(city, start, end):
     # and radar data (using sentinel1GND data)
     for year in range(start, end+1):
         generateImage(city, coordinates, year, oauth)
+        getRadar(city, coordinates, year, oauth)
         
