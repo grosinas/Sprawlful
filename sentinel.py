@@ -3,8 +3,8 @@ from requests_oauthlib import OAuth2Session
 
 # Your client credentials 
 # DO NOT CHANGE, it has like 29k requests. Do not waste.
-client_id = '0e34822b-7026-4e20-b9eb-b520345c45d1'
-client_secret = 'LcWLJDaUnnVfy8aJNT91EeMmfCAhd8KU'
+client_id = 'sh-b203c513-8741-4360-b982-e4ac316c9f9f'
+client_secret = 'Tq07v2FnohSm9PucuklZqRu2IPoBMt66'
 
 # Create a session
 client = BackendApplicationClient(client_id=client_id)
@@ -12,9 +12,8 @@ oauth = OAuth2Session(client=client)
 
 # Get token for the session
 token = oauth.fetch_token(token_url='https://identity.dataspace.copernicus.eu/auth/realms/CDSE/protocol/openid-connect/token',
-                          client_secret=client_secret, include_client_id=True)
-
-
+                          client_secret=client_secret,
+                          include_client_id=True)
 
 #==============================================CHANGES BELOW THIS
 evalscript = """
@@ -22,60 +21,53 @@ evalscript = """
 function setup() {
   return {
     input: ["VV"],
-    output: {
-      bands: 1,
-      sampleType: "AUTO", // default value - scales the output values from [0,1] to [0,255].
-    },
+    output: { id: "default", bands: 1 },
   }
 }
 
-function evaluatePixel(sample) {
-  return [2 * sample.VV]
+function evaluatePixel(samples) {
+  return [2 * samples.VV]
 }
 """
 
 request = {
     "input": {
         "bounds": {
-            "properties": {"crs": "http://www.opengis.net/def/crs/EPSG/0/32633" },
-            "bbox": [ 
-                20.775113, 
-                52.391717,  
-                21.375827, 
-                52.086301, 
+            "bbox": [
+                484696.51,
+                5804631.34, 
+                525751.04,
+                5770703.56
             ],
+            "properties": {"crs": "http://www.opengis.net/def/crs/EPSG/0/3857"},
         },
-        "data": [{
+        "data": [
+            {
                 "type": "sentinel-1-grd",
                 "dataFilter": {
                     "timeRange": {
-                        "from": "2022-11-01T00:00:00Z", #mess with these dates.
-                        "to": "2022-11-20T00:00:00Z",
-                    },
-                    "resolution": "HIGH",
-                    "acquisitionMode": "IW"
-            },
-            "processing": {
-                "orthorectify": "true",
-                "demInstance": "COPERNICUS_30"
-            },
-        }
-],
+                        "from": "2020-02-02T00:00:00Z",
+                        "to": "2021-04-02T23:59:59Z",
+                    }
+                },
+                "processing": {"orthorectify": "true"},
+            }
+        ],
     },
     "output": {
-        "resx": 10,
-        "resy": 10,
-        "responses": [{
-            "identifier": "default",
-            "format": {
-                "type": "image/png"
+        "width": 2048,
+        "height": 2048,
+        "responses": [
+            {
+                "identifier": "default",
+                "format": {"type": "image/png"},
             }
-        }]
+        ],
     },
     "evalscript": evalscript,
 }
 
-url = "https://services.sentinel-hub.com/api/v1/process"
+url = "https://sh.dataspace.copernicus.eu/api/v1/process"
 response = oauth.post(url, json=request)
 print("Headers:", response.headers)
 # print("Content:", response.content)
