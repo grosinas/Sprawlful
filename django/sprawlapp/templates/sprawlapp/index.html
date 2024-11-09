@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html>
+<body>
+
+<h2>My Future City</h2>
+<p>A tool designed to help track and mitigate urban sprawl</p>
+
+<form role="search"  method="POST" novalidate>
+{% csrf_token %}
+{{ form.as_p }}
+<input type="submit" value="Submit">
+</form>
+
+{% load static %}
+{% if image_urls %}
+<div><div>
+		{% for year, url in image_urls.items %}
+			<div>
+				<h3>{{year}}</h3> 
+				<img src="{% static url %}" alt="Image" width="500" height="600">		
+			</div>
+			{% endfor %} 
+	</div></div>
+{% endif %}
+
+</body>
+</html>
