@@ -16,6 +16,12 @@ Use `pip freeze > requirements.txt` to generate a new `requirements.txt` file if
 
 <br><hr><br>
 
+### Running Django
+Pretty straightforward, run this command in the django directory. If it dosen't work talk to me:
+```
+python manage.py runserver
+```
+
 ### API Key
 The oauth client contains an API key. Do not change it, it gives you access to all the APIs on https://dataspace.copernicus.eu.
 Limit is about 29k ish requests. Do not do stupid loops with requests in it.
