@@ -1,6 +1,17 @@
+#### MyFutureCity
+MyFutureCity is the future city planning app which uses satellite images and radar data to track (and in the future - predict) urban sprawl.
+
+### Generating Sentinel Tokens uwu
+I bet you really want to try our very cool tool!!! 
+Well... you can!!!! (ish)
+
+To play around with satellite image generation you can use our web app, follow the instructions below.
+
+
+
 ### Python virtual environments
 Use a virtual environment (venv) or you will break your python install at some point.
->`pip install venv`
+>`pip install virtualenv`
 
 >`python -m venv env`
 
@@ -26,17 +37,4 @@ python manage.py runserver
 The oauth client contains an API key. Do not change it, it gives you access to all the APIs on https://dataspace.copernicus.eu.
 Limit is about 29k ish requests. Do not do stupid loops with requests in it.
 
-### WTF is this image
-
-For the image, I am stll not sure what is being returned. 
-I used https://documentation.dataspace.copernicus.eu/APIs/SentinelHub/Process/Examples/S2L1C.html#true-color. It is supposed to be Helsinki Metropolitan Area. The `evalscript` determines what calculations the API runs before returning data. The evaluatePixel function returns a 3 channel array of pixels (RGB i think, so you can modify colours if you need, but its unnecessary I think). 
-
-It would be really nice if we could get the image pulling for Helsinki working, then we can say that we got something from an satellite image API, rather than screenshotting Google Maps. 
-
-### This does not work, what are we submitting?
-
-The metrics for the calculation of WUP (ref. Section 2 of https://www.eea.europa.eu/publications/urban-sprawl-in-europe) for ONLY HELSINKI (for now), may be obtained from web sources, and road density and the elevation metric (Relief energy) (and maybe more, ref Axel's notes, the ones with the satellite drawn next to them) can be obtained from running image processing on the map image, but for the purpose of the demo/presentation/pitch, it may be hand calculated. Table 2.2 lists the variables.
-
-### Want to change ideas on Saturday
-
-Feel free to switch it up as you like, I am not there so I don't get to complain about it. All the best!
+Set the client-id and secret into the client-id and secret variables in django/sprawlapp/pictures.py (or in any other file where you find the fields ;) let's call them easter eggs...)
